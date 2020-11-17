@@ -1,6 +1,6 @@
 #include "Ahp.h"
 
-void Ahp::ahpAlgorithm(Loader loader, string path_solution_file) {
+void Ahp::ahpAlgorithm(Loader &loader, string path_solution_file) {
     vector<vector<vector<float>>> pairwise_comparisons = loader.getPairwiseComparisons();
     vector<vector<vector<float>>> pairwise_comparisons_normalized = pairwise_comparisons;
     normalizePairwiseComparisons(pairwise_comparisons_normalized);
@@ -8,6 +8,7 @@ void Ahp::ahpAlgorithm(Loader loader, string path_solution_file) {
     vector<float> maximum_eigen_value = calculateMaximumEigenValue(pairwise_comparisons, eigen_vector);
     vector<float> consistency_index = calculateConsistencyIndex(maximum_eigen_value, pairwise_comparisons.size() - 1);
     vector<float> consistency_rate = calculateConsistencyRate(consistency_index, pairwise_comparisons.size() - 1);
+    writeSolution(loader, path_solution_file, eigen_vector, consistency_index, consistency_rate);
 }
 
 void Ahp::normalizePairwiseComparisons(vector<vector<vector<float> > > &pairwise_comparisons) {
@@ -75,4 +76,56 @@ vector<float> &Ahp::calculateConsistencyRate(vector<float> &consistency_index, i
         consistency_rate->at(i) = consistency_index.at(i) / consistency_ratio;
     }
     return *consistency_rate;
+}
+
+void Ahp::writeSolution(Loader &loader, string path_solution_file, vector<vector<float> > &eigen_vector,
+                        vector<float> &consistency_index, vector<float> &consistency_rate) {
+    vector<string> criteria = loader.getCriteria();
+    vector<string> alternatives = loader.getAlternatives();
+    ofstream file;
+    file.open(path_solution_file);
+    if (file.good()) {
+        file << "Eigen vectors " << endl;
+        file << "------------------ " << endl;
+        for (int i = 0; i < eigen_vector.size(); ++i) {
+            if (i == 0) {
+                file << "CRITERIA VS CRITERIA" << endl;
+                for (int j = 0; j < eigen_vector.at(i).size(); ++j) {
+                    file << "Criteria " << criteria.at(j) << ": " << eigen_vector.at(i).at(j) << endl;
+                }
+            } else {
+                file << "ALTERNATIVES VS ALTERNATIVES" << endl;
+                file << "Criteria: " << criteria.at(i - 1) << endl;
+                for (int j = 0; j < eigen_vector.at(i).size(); ++j) {
+                    file << "Alternative " << alternatives.at(j) << ": " << eigen_vector.at(i).at(j) << endl;
+                }
+            }
+            file << endl;
+        }
+        file << "Consistency index " << endl;
+        file << "------------------ " << endl;
+        for (int i = 0; i < consistency_index.size(); ++i) {
+            if (i == 0) {
+                file << "CRITERIA VS CRITERIA" << endl;
+            } else {
+                file << "ALTERNATIVES VS ALTERNATIVES" << endl;
+                file << "Criteria " << criteria.at(i-1) << ": ";
+            }
+            file << consistency_index.at(i);
+            file << endl << endl;
+        }
+        file << "Consistency rate " << endl;
+        file << "------------------ " << endl;
+        for (int i = 0; i < consistency_rate.size(); ++i) {
+            if (i == 0) {
+                file << "CRITERIA VS CRITERIA" << endl;
+            } else {
+                file << "ALTERNATIVES VS ALTERNATIVES" << endl;
+            }
+            file << consistency_rate.at(i);
+            file << endl << endl;
+        }
+    } else {
+        cerr << "Cannot open file." << endl;
+    }
 }
