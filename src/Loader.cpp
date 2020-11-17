@@ -36,11 +36,10 @@ Loader::Loader(string &pathFile) :
 
             this->pairwise_comparisons.resize(this->criteria.size() + 1);
             this->pairwise_comparisons[0].resize(this->criteria.size());
-            for (int i = 0; i < this->alternatives.size(); ++i) {
+            for (int i = 0; i <= this->alternatives.size(); ++i) {
                 getline(fe, line);
                 ss.clear();
                 ss << line;
-
                 do {
                     getline(ss, term, ';');
                     if (isFraction(term)) {
@@ -51,8 +50,9 @@ Loader::Loader(string &pathFile) :
                     this->pairwise_comparisons.at(0).at(i).push_back(value);
                 } while (!ss.eof());
             }
-            skip(fe, 2, '\n');
+
             for (int j = 1; j < this->criteria.size() + 1; ++j) {
+                skip(fe, 1, '\n');
                 this->pairwise_comparisons[j].resize(this->alternatives.size());
                 for (int i = 0; i < this->alternatives.size(); ++i) {
                     getline(fe, line);
@@ -69,7 +69,6 @@ Loader::Loader(string &pathFile) :
                         this->pairwise_comparisons.at(j).at(i).push_back(value);
                     } while (!ss.eof());
                 }
-                skip(fe, 1, '\n');
             }
         }
         cout << "File charged successfully." << endl;

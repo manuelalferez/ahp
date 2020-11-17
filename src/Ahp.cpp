@@ -12,7 +12,7 @@ void Ahp::normalizePairwiseComparisons(vector<vector<vector<float> > > &pairwise
             for (int k = 0; k < pairwise_comparisons.at(i).size(); ++k) {
                 sum += pairwise_comparisons.at(i).at(k).at(j);
             }
-            for (int k = 0; k < pairwise_comparisons.at(i).at(j).size(); ++k) {
+            for (int k = 0; k < pairwise_comparisons.at(i).size(); ++k) {
                 pairwise_comparisons.at(i).at(k).at(j) /= sum;
             }
         }
