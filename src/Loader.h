@@ -16,6 +16,13 @@ using namespace std;
 class Loader {
 public:
     explicit Loader(string &pathFile);
+
+    const vector<vector<vector<float>>> &getPairwiseComparisons() const;
+
+    const vector<string> &getAlternatives() const;
+
+    const vector<string> &getCriteria() const;
+
 private:
     static void skip(std::istream &is, size_t n, char delimiter);
     bool isFraction(string term);

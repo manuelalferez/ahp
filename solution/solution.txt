@@ -1,0 +1,98 @@
+Ranking
+------------------ 
+CRITERIA VS CRITERIA
+Criteria c1: 1
+Criteria c2: 2
+Criteria c3: 3
+Criteria c4: 4
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c1
+Alternative a1: 1
+Alternative a2: 3
+Alternative a3: 2
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c2
+Alternative a1: 2
+Alternative a2: 3
+Alternative a3: 1
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c3
+Alternative a1: 3
+Alternative a2: 1
+Alternative a3: 2
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c4
+Alternative a1: 3
+Alternative a2: 1
+Alternative a3: 2
+
+Eigen vectors 
+------------------ 
+CRITERIA VS CRITERIA
+Criteria c1: 0.588323
+Criteria c2: 0.25711
+Criteria c3: 0.104549
+Criteria c4: 0.0500178
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c1
+Alternative a1: 0.753014
+Alternative a2: 0.0751874
+Alternative a3: 0.171799
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c2
+Alternative a1: 0.282839
+Alternative a2: 0.0737721
+Alternative a3: 0.643389
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c3
+Alternative a1: 0.0978244
+Alternative a2: 0.715074
+Alternative a3: 0.187102
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c4
+Alternative a1: 0.0738203
+Alternative a2: 0.668994
+Alternative a3: 0.257186
+
+Consistency index 
+------------------ 
+CRITERIA VS CRITERIA
+0.0614066
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria c1: 0.0673741
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria c2: 0.0483629
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria c3: 0.00164962
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria c4: 0.0141599
+
+Consistency rate 
+------------------ 
+CRITERIA VS CRITERIA
+0.0682296
+
+ALTERNATIVES VS ALTERNATIVES
+0.116162
+
+ALTERNATIVES VS ALTERNATIVES
+0.0833842
+
+ALTERNATIVES VS ALTERNATIVES
+0.00284417
+
+ALTERNATIVES VS ALTERNATIVES
+0.0244137
+
