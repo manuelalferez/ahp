@@ -2,8 +2,10 @@
 
 void Ahp::ahpAlgorithm(Loader loader, string path_solution_file) {
     vector<vector<vector<float>>> pairwise_comparisons = loader.getPairwiseComparisons();
-    normalizePairwiseComparisons(pairwise_comparisons);
-    vector<vector<float>> eigen_vector = calculateEigenVector(pairwise_comparisons);
+    vector<vector<vector<float>>> pairwise_comparisons_normalized = pairwise_comparisons;
+    normalizePairwiseComparisons(pairwise_comparisons_normalized);
+    vector<vector<float>> eigen_vector = calculateEigenVector(pairwise_comparisons_normalized);
+    vector<float> maximum_eigen_value = calculateMaximumEigenValue(pairwise_comparisons, eigen_vector);
 }
 
 void Ahp::normalizePairwiseComparisons(vector<vector<vector<float> > > &pairwise_comparisons) {
@@ -33,4 +35,19 @@ vector<vector<float> > &Ahp::calculateEigenVector(vector<vector<vector<float> > 
         }
     }
     return *eigen_vector;
+}
+
+vector<float> & Ahp::calculateMaximumEigenValue(vector<vector<vector<float> > > &pairwise_comparisons,
+                                                vector<vector<float> > &eigen_vector) {
+    vector<float> *maximum_eigen_value = new vector<float>(pairwise_comparisons.size());
+    for (int i = 0; i < pairwise_comparisons.size(); ++i) {
+        for (int j = 0; j < pairwise_comparisons.at(i).size(); ++j) {
+            float sum = 0;
+            for (int k = 0; k < pairwise_comparisons.at(i).size(); ++k) {
+                sum += pairwise_comparisons.at(i).at(k).at(j);
+            }
+            maximum_eigen_value->at(i) += sum * eigen_vector.at(i).at(j);
+        }
+    }
+    return *maximum_eigen_value;
 }
