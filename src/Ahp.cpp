@@ -85,6 +85,24 @@ void Ahp::writeSolution(Loader &loader, string path_solution_file, vector<vector
     ofstream file;
     file.open(path_solution_file);
     if (file.good()) {
+        vector<vector<int>> ranking = getRanking(eigen_vector);
+        file << "Ranking" << endl;
+        file << "------------------ " << endl;
+        for (int k = 0; k < ranking.size(); ++k) {
+            if (k == 0) {
+                file << "CRITERIA VS CRITERIA" << endl;
+                for (int j = 0; j < ranking.at(k).size(); ++j) {
+                    file << "Criteria " << criteria.at(j) << ": " << ranking.at(k).at(j) << endl;
+                }
+            } else {
+                file << "ALTERNATIVES VS ALTERNATIVES" << endl;
+                file << "Criteria: " << criteria.at(k - 1) << endl;
+                for (int j = 0; j < ranking.at(k).size(); ++j) {
+                    file << "Alternative " << alternatives.at(j) << ": " << ranking.at(k).at(j) << endl;
+                }
+            }
+            file << endl;
+        }
         file << "Eigen vectors " << endl;
         file << "------------------ " << endl;
         for (int i = 0; i < eigen_vector.size(); ++i) {
@@ -109,7 +127,7 @@ void Ahp::writeSolution(Loader &loader, string path_solution_file, vector<vector
                 file << "CRITERIA VS CRITERIA" << endl;
             } else {
                 file << "ALTERNATIVES VS ALTERNATIVES" << endl;
-                file << "Criteria " << criteria.at(i-1) << ": ";
+                file << "Criteria " << criteria.at(i - 1) << ": ";
             }
             file << consistency_index.at(i);
             file << endl << endl;
@@ -128,4 +146,27 @@ void Ahp::writeSolution(Loader &loader, string path_solution_file, vector<vector
     } else {
         cerr << "Cannot open file." << endl;
     }
+}
+
+vector<vector<int>> &Ahp::getRanking(vector<vector<float> > &eigen_vector) {
+    vector<vector<int>> *ranking = new vector<vector<int>>(eigen_vector.size());
+    for (int i = 0; i < eigen_vector.size(); ++i) {
+        ranking->at(i).resize(eigen_vector.at(i).size());
+        for (int k = 0; k < ranking->at(i).size(); ++k) {
+            ranking->at(i).at(k) = 1;
+        }
+        int pos = 0;
+        for (int j = 0; j < eigen_vector.at(i).size() - 1; ++j) {
+            for (int k = j; k < eigen_vector.at(i).size(); ++k) {
+                if (j != k) {
+                    if (eigen_vector.at(i).at(j) < eigen_vector.at(i).at(k)) {
+                        ranking->at(i).at(j) += 1;
+                    } else {
+                        ranking->at(i).at(k) += 1;
+                    }
+                }
+            }
+        }
+    }
+    return *ranking;
 }

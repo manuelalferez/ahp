@@ -1,3 +1,35 @@
+Ranking
+------------------ 
+CRITERIA VS CRITERIA
+Criteria c1: 1
+Criteria c2: 2
+Criteria c3: 3
+Criteria c4: 4
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c1
+Alternative a1: 1
+Alternative a2: 3
+Alternative a3: 2
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c2
+Alternative a1: 2
+Alternative a2: 3
+Alternative a3: 1
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c3
+Alternative a1: 3
+Alternative a2: 1
+Alternative a3: 2
+
+ALTERNATIVES VS ALTERNATIVES
+Criteria: c4
+Alternative a1: 3
+Alternative a2: 1
+Alternative a3: 2
+
 Eigen vectors 
 ------------------ 
 CRITERIA VS CRITERIA

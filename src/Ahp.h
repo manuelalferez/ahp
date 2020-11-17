@@ -24,6 +24,7 @@ namespace Ahp {
 
     void writeSolution(Loader &loader, string path_solution_file, vector<vector<float>> &eigen_vector,
                        vector<float> &consistency_index,  vector<float>& consistency_rate);
+    vector<vector<int>> & getRanking(vector<vector<float>> &eigen_vector);
 };
 
 
