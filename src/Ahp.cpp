@@ -6,6 +6,7 @@ void Ahp::ahpAlgorithm(Loader loader, string path_solution_file) {
     normalizePairwiseComparisons(pairwise_comparisons_normalized);
     vector<vector<float>> eigen_vector = calculateEigenVector(pairwise_comparisons_normalized);
     vector<float> maximum_eigen_value = calculateMaximumEigenValue(pairwise_comparisons, eigen_vector);
+    vector<float> consistency_index = calculateConsistencyIndex(maximum_eigen_value, pairwise_comparisons.size() - 1);
 }
 
 void Ahp::normalizePairwiseComparisons(vector<vector<vector<float> > > &pairwise_comparisons) {
@@ -37,8 +38,8 @@ vector<vector<float> > &Ahp::calculateEigenVector(vector<vector<vector<float> > 
     return *eigen_vector;
 }
 
-vector<float> & Ahp::calculateMaximumEigenValue(vector<vector<vector<float> > > &pairwise_comparisons,
-                                                vector<vector<float> > &eigen_vector) {
+vector<float> &Ahp::calculateMaximumEigenValue(vector<vector<vector<float> > > &pairwise_comparisons,
+                                               vector<vector<float> > &eigen_vector) {
     vector<float> *maximum_eigen_value = new vector<float>(pairwise_comparisons.size());
     for (int i = 0; i < pairwise_comparisons.size(); ++i) {
         for (int j = 0; j < pairwise_comparisons.at(i).size(); ++j) {
@@ -50,4 +51,12 @@ vector<float> & Ahp::calculateMaximumEigenValue(vector<vector<vector<float> > > 
         }
     }
     return *maximum_eigen_value;
+}
+
+vector<float> &Ahp::calculateConsistencyIndex(vector<float> &maximum_eigen_value, int n) {
+    vector<float> *consistency_index = new vector<float>(maximum_eigen_value.size());
+    for (int i = 0; i < consistency_index->size(); ++i) {
+        consistency_index->at(i) = (maximum_eigen_value.at(i) - n) / (n - 1);
+    }
+    return *consistency_index;
 }
