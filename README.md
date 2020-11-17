@@ -11,7 +11,7 @@ The [Analytic hierarchy process](https://en.wikipedia.org/wiki/Analytic_hierarch
 
 ## Goal 🏆
 
-Develop an application to solve problems with AHP algorithm.
+Develop an application to solve problems with [AHP algorithm](https://www.pmi.org/learning/library/analytic-hierarchy-process-prioritize-projects-6608).
 
 
 
@@ -22,6 +22,11 @@ The graphical interface must be able to handle:
 * Alternatives
 * Criteria
 * Preference relationships (comparison of to pairs of criteria and alternatives)
+
+
+
+The algorithm must be able to calculate:
+
 * Consistency indices (CI)
 * Ratios of consistency (CR)
 * Eigenvalues
