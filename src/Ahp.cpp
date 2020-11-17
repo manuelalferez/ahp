@@ -7,6 +7,7 @@ void Ahp::ahpAlgorithm(Loader loader, string path_solution_file) {
     vector<vector<float>> eigen_vector = calculateEigenVector(pairwise_comparisons_normalized);
     vector<float> maximum_eigen_value = calculateMaximumEigenValue(pairwise_comparisons, eigen_vector);
     vector<float> consistency_index = calculateConsistencyIndex(maximum_eigen_value, pairwise_comparisons.size() - 1);
+    vector<float> consistency_rate = calculateConsistencyRate(consistency_index, pairwise_comparisons.size() - 1);
 }
 
 void Ahp::normalizePairwiseComparisons(vector<vector<vector<float> > > &pairwise_comparisons) {
@@ -55,8 +56,23 @@ vector<float> &Ahp::calculateMaximumEigenValue(vector<vector<vector<float> > > &
 
 vector<float> &Ahp::calculateConsistencyIndex(vector<float> &maximum_eigen_value, int n) {
     vector<float> *consistency_index = new vector<float>(maximum_eigen_value.size());
-    for (int i = 0; i < consistency_index->size(); ++i) {
+    consistency_index->at(0) = (maximum_eigen_value.at(0) - n) / (n - 1);
+    n = n - 1;
+    for (int i = 1; i < consistency_index->size(); ++i) {
         consistency_index->at(i) = (maximum_eigen_value.at(i) - n) / (n - 1);
     }
     return *consistency_index;
+}
+
+vector<float> &Ahp::calculateConsistencyRate(vector<float> &consistency_index, int n) {
+    float random_consistency_ratio[10] = {0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49};
+    vector<float> *consistency_rate = new vector<float>(consistency_index.size());
+    float consistency_ratio = random_consistency_ratio[n - 1];
+    consistency_rate->at(0) = consistency_index.at(0) / consistency_ratio;
+    n = n - 1;
+    consistency_ratio = random_consistency_ratio[n - 1];
+    for (int i = 1; i < consistency_rate->size(); ++i) {
+        consistency_rate->at(i) = consistency_index.at(i) / consistency_ratio;
+    }
+    return *consistency_rate;
 }

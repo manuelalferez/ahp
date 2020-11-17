@@ -18,6 +18,7 @@ namespace Ahp {
     vector<float> & calculateMaximumEigenValue(vector<vector<vector<float>>> &pairwise_comparisons,
                                                vector<vector<float>> &eigen_vector);
     vector<float>& calculateConsistencyIndex(vector<float>& maximum_eigen_value, int n);
+    vector<float>& calculateConsistencyRate(vector<float>& consistency_index, int n);
 };
 
 
