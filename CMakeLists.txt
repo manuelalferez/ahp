@@ -3,4 +3,4 @@ project(ahp)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(ahp src/main.cpp)
+add_executable(ahp src/main.cpp src/Loader.cpp src/Loader.h)

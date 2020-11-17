@@ -1,6 +1,9 @@
 #include <iostream>
 
+#include "Loader.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    string data_path = "../data/data.txt";
+    std::cout << "Hello, AHP!" << std::endl;
+    Loader loader(data_path);
     return 0;
 }
