@@ -95,3 +95,15 @@ float Loader::fractionToFloat(string fraction) {
     string denominator = fraction.substr(2, fraction.find('/'));
     return stof(numerator) / stof(denominator);
 }
+
+const vector<vector<vector<float>>> &Loader::getPairwiseComparisons() const {
+    return pairwise_comparisons;
+}
+
+const vector<string> &Loader::getAlternatives() const {
+    return alternatives;
+}
+
+const vector<string> &Loader::getCriteria() const {
+    return criteria;
+}
