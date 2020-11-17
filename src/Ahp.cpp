@@ -9,6 +9,8 @@ void Ahp::ahpAlgorithm(Loader &loader, string path_solution_file) {
     vector<float> consistency_index = calculateConsistencyIndex(maximum_eigen_value, pairwise_comparisons.size() - 1);
     vector<float> consistency_rate = calculateConsistencyRate(consistency_index, pairwise_comparisons.size() - 1);
     writeSolution(loader, path_solution_file, eigen_vector, consistency_index, consistency_rate);
+    std::cout << "AHP executed successfully. Please, For look at the file <<" << path_solution_file
+              << ">> to see the solution." << std::endl;
 }
 
 void Ahp::normalizePairwiseComparisons(vector<vector<vector<float> > > &pairwise_comparisons) {
